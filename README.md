@@ -1,12 +1,12 @@
 # AI Blog
 
-A small, fully self-hosted blog about AI. Everything in it is open source:
+A small blog about AI where everything is open source and every post lives in git:
 
 - **[Astro](https://astro.build)** turns the posts into static HTML, with no client-side JavaScript.
 - **[Keystatic](https://keystatic.com)** is a local, git-backed editor for writing posts.
 - **Markdoc** (`.mdoc`) files in `src/content/posts/` hold the posts.
-- **[Caddy](https://caddyserver.com)** on any VPS serves the site, with automatic HTTPS.
-- **GitHub Actions** builds and deploys with `rsync` on every push to `main`.
+- **GitHub Pages** hosts the site at https://jeremyorion.github.io/ai-blog/
+- **GitHub Actions** builds and deploys it on every push to `main`.
 
 ## Writing
 
@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-- Site: http://127.0.0.1:4321
+- Site: http://127.0.0.1:4321/ai-blog/
 - Editor: http://127.0.0.1:4321/keystatic
 
 The editor saves posts as `.mdoc` files in `src/content/posts/`. You can also write them by hand
@@ -33,23 +33,25 @@ src/content/posts/       your posts
 src/pages/               routes: home, /blog, /blog/[slug], /tags, /about, /rss.xml
 src/layouts/Base.astro   HTML shell, header, footer, meta tags
 src/styles/global.css    all styles (light and dark)
-deploy/                  Caddyfile and one-time server setup script
+src/lib/url.ts           url() helper that adds the base path to internal links
 ```
 
-## Deploying to your own server
+## Deploying
 
-1. Create a Debian/Ubuntu VPS and point your domain's DNS A/AAAA records at it.
-2. Run the setup script: `ssh root@SERVER 'bash -s' < deploy/setup-server.sh`
-3. Create a deploy key: `ssh-keygen -t ed25519 -f deploy_key -N ""` and add `deploy_key.pub`
-   to `/home/deploy/.ssh/authorized_keys` on the server.
-4. Copy `deploy/Caddyfile` to `/etc/caddy/Caddyfile`, replace `example.com` with your domain,
-   then run `systemctl reload caddy`.
-5. Add these GitHub repo secrets:
-   - `DEPLOY_HOST`: the server's IP or hostname
-   - `DEPLOY_SSH_KEY`: the contents of `deploy_key` (the private key)
-   - `DEPLOY_KNOWN_HOSTS`: the output of `ssh-keyscan SERVER`
-6. Set `site` in `astro.config.mjs` and the sitemap URL in `public/robots.txt` to your domain.
-7. Push to `main`.
+Pushing to `main` builds the site and publishes it to GitHub Pages
+(`.github/workflows/deploy.yml`). In the repo, **Settings → Pages → Source** must be set to
+**GitHub Actions**.
+
+**Internal links:** the site is served under `/ai-blog/`, so write internal links in templates
+as `url('/blog/')` (from `src/lib/url.ts`), not as a bare `"/blog/"`.
+
+### Using your own domain
+
+1. In **Settings → Pages → Custom domain**, enter your domain and follow GitHub's DNS
+   instructions (a `CNAME` record for a subdomain, or `A`/`AAAA` records for an apex domain).
+2. In `astro.config.mjs`, set `site` to `https://yourdomain.com` and delete the `base` line.
+   All links update automatically.
+3. Turn on **Enforce HTTPS** once the certificate is issued.
 
 ## Customising
 

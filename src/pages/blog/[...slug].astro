@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { getPosts, formatDate } from '../../lib/posts';
+import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -21,7 +22,7 @@ const { title, description, pubDate, updatedDate, tags } = post.data;
         {updatedDate && <> · updated {formatDate(updatedDate)}</>}
       </p>
       {tags.length > 0 && (
-        <p class="tags">{tags.map((t) => <a href={`/tags/${t}/`}>#{t}</a>)}</p>
+        <p class="tags">{tags.map((t) => <a href={url(`/tags/${t}/`)}>#{t}</a>)}</p>
       )}
     </header>
     <div class="prose"><Content /></div>

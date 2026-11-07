@@ -11,12 +11,12 @@ Welcome! This is the first post on a blog about **artificial intelligence**: mod
 
 ## How this site works
 
-The whole thing is open source and self-hosted:
+The whole thing is open source, and every post lives in a git repo:
 
 - Posts are Markdown (Markdoc) files in a git repo.
 - [Astro](https://astro.build) turns them into static HTML.
 - [Keystatic](https://keystatic.com) provides a local editor at `/keystatic`.
-- A small VPS running Caddy serves the files.
+- GitHub Pages hosts the built site, and GitHub Actions redeploys on every push.
 
 ```python
 from anthropic import Anthropic

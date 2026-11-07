@@ -10,7 +10,10 @@ import keystatic from '@keystatic/astro';
 const isDev = process.argv.includes('dev');
 
 export default defineConfig({
-  site: 'https://example.com', // TODO: your domain
+  // GitHub Pages project site: https://jeremyorion.github.io/ai-blog/
+  // With a custom domain, set `site` to it and remove `base`.
+  site: 'https://jeremyorion.github.io',
+  base: '/ai-blog',
   output: 'static',
   integrations: [react(), markdoc(), sitemap(), ...(isDev ? [keystatic()] : [])],
 });

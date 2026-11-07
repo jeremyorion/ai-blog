@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import { getPosts } from '../lib/posts';
 import { SITE_DESCRIPTION } from '../consts';
+import { url } from '../lib/url';
 
 const posts = (await getPosts()).slice(0, 10);
 ---
@@ -10,5 +11,5 @@ const posts = (await getPosts()).slice(0, 10);
   <section class="intro"><p>{SITE_DESCRIPTION}</p></section>
   <h2>Latest posts</h2>
   <PostList posts={posts} />
-  <p><a href="/blog/">All posts →</a></p>
+  <p><a href={url('/blog/')}>All posts →</a></p>
 </Base>
