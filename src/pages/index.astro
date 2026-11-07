@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/posts';
+import { SITE_DESCRIPTION } from '../consts';
+
+const posts = (await getPosts()).slice(0, 10);
+---
+<Base>
+  <section class="intro"><p>{SITE_DESCRIPTION}</p></section>
+  <h2>Latest posts</h2>
+  <PostList posts={posts} />
+  <p><a href="/blog/">All posts →</a></p>
+</Base>

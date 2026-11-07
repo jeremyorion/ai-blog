@@ -1,0 +1,33 @@
+---
+title: Hello, world
+description: Why this blog exists and what to expect from it.
+pubDate: 2026-11-07
+tags:
+  - meta
+  - ai
+draft: false
+---
+Welcome! This is the first post on a blog about **artificial intelligence**: models, tools, research papers, and what it all means.
+
+## How this site works
+
+The whole thing is open source and self-hosted:
+
+- Posts are Markdown (Markdoc) files in a git repo.
+- [Astro](https://astro.build) turns them into static HTML.
+- [Keystatic](https://keystatic.com) provides a local editor at `/keystatic`.
+- A small VPS running Caddy serves the files.
+
+```python
+from anthropic import Anthropic
+
+client = Anthropic()
+msg = client.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=256,
+    messages=[{"role": "user", "content": "Say hello to my readers."}],
+)
+print(msg.content[0].text)
+```
+
+> Delete this post and write your own, either in the editor or by adding a `.mdoc` file to `src/content/posts/`.
