@@ -40,6 +40,11 @@ Wi-Fi, and stop it when you're done. Plain `npm run dev` stays limited to this m
 first time you run it, macOS may ask whether to allow incoming connections for `node`; click
 **Allow**.
 
+**Over Tailscale** you can edit from anywhere, not just at home. Any device on your tailnet can
+open `http://jeremys-mac-studio.tail2b5263.ts.net:4321/keystatic`, or the short name
+`http://jeremys-mac-studio:4321/keystatic`. Tailscale only lets your own devices in, so this is
+safer than the home network. The Wi-Fi caution above still applies while `dev:lan` is running.
+
 Edits made from another device are saved on this Mac. Commit and push from here to publish.
 
 ## Project layout

@@ -17,9 +17,11 @@ export default defineConfig({
   base: isDev ? undefined : '/ai-blog',
   output: 'static',
   server: {
-    // Lets other devices reach `npm run dev:lan` by your Mac's Bonjour name,
-    // e.g. http://jeremys-mac-studio.local:4321 (IP addresses work without this).
-    allowedHosts: ['.local'],
+    // Hostnames other devices may use to reach `npm run dev:lan`
+    // (IP addresses always work):
+    //   .local  - Bonjour on your home network, e.g. jeremys-mac-studio.local
+    //   .ts.net - Tailscale MagicDNS, e.g. jeremys-mac-studio.tail2b5263.ts.net
+    allowedHosts: ['.local', '.ts.net', 'jeremys-mac-studio'],
   },
   integrations: [react(), markdoc(), sitemap(), ...(isDev ? [keystatic()] : [])],
 });
