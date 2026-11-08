@@ -5,7 +5,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dev:lan": "astro dev --host"
   },
   "license": "MIT",
   "type": "module",

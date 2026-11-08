@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-- Site: http://127.0.0.1:4321/ai-blog/
+- Site: http://127.0.0.1:4321 (no `/ai-blog/` prefix in dev)
 - Editor: http://127.0.0.1:4321/keystatic
 
 The editor saves posts as `.mdoc` files in `src/content/posts/`. You can also write them by hand
@@ -23,6 +23,24 @@ in any text editor. Commit and push to publish. Posts marked **Draft** show up i
 
 The editor runs only in `npm run dev`. The production build is plain static files, so there is
 no admin panel on the live site.
+
+### Editing from other devices on your network
+
+```sh
+npm run dev:lan
+```
+
+This prints a **Network** address such as `http://192.168.x.x:4321`. Open
+`<that address>/keystatic` on your phone, tablet or another computer. Your Mac's Bonjour name
+also works, for example `http://jeremys-mac-studio.local:4321/keystatic`.
+
+Keystatic has **no login in local mode**, so anyone on the same network can edit the files in
+this repo while `dev:lan` is running. Only use it on a network you trust, such as your home
+Wi-Fi, and stop it when you're done. Plain `npm run dev` stays limited to this machine. The
+first time you run it, macOS may ask whether to allow incoming connections for `node`; click
+**Allow**.
+
+Edits made from another device are saved on this Mac. Commit and push from here to publish.
 
 ## Project layout
 
